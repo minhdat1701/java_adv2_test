@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: basicsecurity
+  datasource:
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/demo
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: ${DDL_AUTO}
+    properties:
+      hibernate:
+        format_sql: true
+  session:
+    jdbc:
+      initialize-schema: always
+    timeout: 180s

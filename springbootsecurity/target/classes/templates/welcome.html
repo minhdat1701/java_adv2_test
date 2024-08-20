@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 50px;
+        }
+        .cart {
+            margin: 30px;
+            text-align: end;
+        }
+        h3 a {
+            text-decoration: none;
+            color: red;
+        }
+        a.btn-cart {
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+            background-color: green;
+            border-radius: 15px;
+        }
+        .product-list
+        {
+            display: flex;
+            gap: 50px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        .product
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+            width: 250px;
+            padding: 25px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .product-img {
+            width: 250px;
+            height: 250px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .product-price {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .product button {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            padding: 5px 0;
+            font-weight: bold;
+        }
+
+        .nav-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-list li {
+            flex: 1;
+            justify-content: center;
+            align-content: center;
+        }
+        .nav-list li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+        .nav-list li:hover {
+            background-color: #ddd;
+            a{color: black;
+            }
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav-list li.search {
+            flex: 2;
+            justify-content: center;
+            align-content: center;
+        }
+        .nav-list li.search form {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+
+        }
+        .nav-list li.search input{
+            padding: 12px;
+            width: 100%;
+            border-radius: 6px 0 0 6px;
+            border: none;
+        }
+        .nav-list li.search button {
+            padding: 12px;
+            border-radius: 0 6px 6px 0;
+            border: none;
+            background-color: green;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to MDShop!</h1>
+    <h3><a href="/welcome">Let buy shoes now!</a></h3>
+
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li><a th:href="@{/}">All</a></li>
+            <li><a th:href="@{/catalog1}">Catalog 1</a></li>
+            <li><a th:href="@{/catalog2}">Catalog 2</a></li>
+            <li class = search>
+                <div>
+                    <form th:action="@{/search}" method="post" style="margin: 20px;">
+                        <input type="text" name="query" placeholder="Search for products...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="cart"><a class="btn-cart" href="shopping/view">Xem giỏ hàng</a></div>
+    <div class="product-list">
+        <div class="product" th:each="product: ${products}" th:object="${product}">
+            <div class="product-img"><img th:src="*{picture}"/> </div>
+            <div class="product-name"><b><span th:text="*{name}"></span></b></div>
+            <div class="product-price"><b><span th:text="*{price}"></span>VNĐ</b></div>
+            <form th:action="@{shopping/addtocart}" method="post">
+                <input type="hidden" th:value="${product.id}" name="productId" id="productId">
+                <button type="submit">Buy</button>
+            </form>
+        </div>
+        <div class="product" th:each="product: ${products}" th:object="${product}">
+            <div class="product-img"><img th:src="*{picture}"/> </div>
+            <div class="product-name"><b><span th:text="*{name}"></span></b></div>
+            <div class="product-price"><b><span th:text="*{price}"></span>VNĐ</b></div>
+            <form th:action="@{shopping/addtocart}" method="post">
+                <input type="hidden" th:value="${product.id}" name="productId" id="productId">
+                <button type="submit">Buy</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

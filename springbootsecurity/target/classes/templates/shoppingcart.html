@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        .product-list {
+            width: 90%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .product {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px;
+            border-bottom: 1px solid #ccc;
+        }
+        .product-img img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .product-img {
+            flex: 1;
+        }
+        .product-name {
+            flex: 2;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .product-price {
+            flex: 1;
+            text-align: center;
+        }
+        .total-price {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 22px;
+            padding-right: 50px;
+        }
+    </style>
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+    <div class="product-list">
+        <div class="product" th:each="item: ${cart.items}" th:object="${item.product}">
+            <div class="product-img"><img th:src="*{picture}"/> </div>
+            <div class="product-name"><b><span th:text="*{name}"></span></b></div>
+            <div class="product-price"><b><span th:text="*{price}"></span></b></div>
+        </div>
+        <div class="total-price">
+            <b>Total: <span id="total"></span> VNĐ</b>
+        </div>
+    </div>
+</body>
+</html>
